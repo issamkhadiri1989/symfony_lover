@@ -17,8 +17,8 @@ class InterviewController
     #[Route(path: "/", name: "app_homepage")]
     public function index(): Response
     {
-        $dailyInterviews = $this->repository->listDailyInterviews();
-
+//        $dailyInterviews = $this->repository->listDailyInterviews();
+        $dailyInterviews = $this->repository->interviewsOfTheYear();
         dd($dailyInterviews);
 
         return new Response();

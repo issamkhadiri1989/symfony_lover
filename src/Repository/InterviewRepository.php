@@ -29,4 +29,21 @@ class InterviewRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Gets all interviews of the current year.
+     *
+     * @return ?Interview[] list of interviews ordered by the closest meeting to the farther
+     */
+    public function interviewsOfTheYear()
+    {
+        $queryBuilder = $this->createQueryBuilder('i');
+
+        return $queryBuilder->select()
+            ->where('year(i.meetingDate) = year(:q)')
+            ->setParameter('q', (new \DateTime('now')))
+            ->orderBy('i.meetingDate', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
 }
